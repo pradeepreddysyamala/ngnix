@@ -1,10 +1,18 @@
-apiVersion: v1
-kind: Pod
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
   name: nginx
+  namespace: argocd
 spec:
-  containers:
-    - name: nginx
-      image: nginx
-      ports:
-        - containerPort: 80
+  project: default
+  source:
+    repoURL: https://github.com/your-user/your-repo.git
+    targetRevision: main
+    path: nginx               # ✅ Must match folder name
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
