@@ -8,3 +8,6 @@ spec:
       image: nginx
       ports:
         - containerPort: 80
+  source:
+    repoURL: https://github.com/your-user/your-repo.git
+    path: nginx
